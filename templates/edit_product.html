@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>📝 Измени производ</h2>
+
+<form method="post" style="max-width: 500px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; background-color: #f9f9f9;">
+    <div style="margin-bottom: 15px;">
+        <label for="name"><strong>Назив на производ:</strong></label><br>
+        <input type="text" id="name" name="name" value="{{ product.name }}" required style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="price"><strong>Продажна цена:</strong></label><br>
+        <input type="number" id="price" name="price" step="0.01" value="{{ product.price }}" required style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="regular_price"><strong>Редовна цена:</strong></label><br>
+        <input type="number" id="regular_price" name="regular_price" step="0.01" value="{{ product.regular_price or '' }}" style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="discount_price"><strong>Цена со попуст:</strong></label><br>
+        <input type="number" id="discount_price" name="discount_price" step="0.01" value="{{ product.discount_price or '' }}" style="width: 100%; padding: 8px;">
+    </div>
+
+    <div style="margin-bottom: 15px;">
+        <label for="description"><strong>Опис:</strong></label><br>
+        <textarea id="description" name="description" rows="4" style="width: 100%; padding: 8px;">{{ product.description or '' }}</textarea>
+    </div>
+
+    <div style="text-align: right;">
+        <button type="submit" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">💾 Зачувај</button>
+    </div>
+</form>
+{% endblock %}

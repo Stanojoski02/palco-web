@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Сите производи</h2>
+
+<p><strong>Датум:</strong> {{ current_date }}</p>
+<a href="{{ url_for('download_pdf') }}" class="cta-button">⬇️ Симни PDF</a>
+
+<table class="product-table" border="1" cellpadding="6" cellspacing="0" style="width: 100%; border-collapse: collapse;">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Назив на стока</th>
+            <th>Продажна цена (ден)</th>
+            <th>Редовна цена</th>
+            <th>Цена со попуст</th>
+            <th>Опис</th>
+            {% if session.get('user') %}
+            <th>Акции</th>
+            {% endif %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.price }}</td>
+            <td>{{ p.regular_price }}</td>
+            <td>{{ p.discount_price }}</td>
+            <td>{{ p.description }}</td>
+            {% if session.get('user') %}
+            <td>
+                <a href="{{ url_for('edit_product', product_id=p.id) }}">✏️</a> |
+                <a href="{{ url_for('delete_product', product_id=p.id) }}" onclick="return confirm('Дали сте сигурни?')">🗑️</a>
+            </td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
